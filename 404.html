@@ -17,19 +17,18 @@
     if (path) {
       if (path.startsWith(licensesDir + "/")) {
         document.getElementById("dynamic-content").textContent = "Not found. You can retrieve the latest version of the license at /latest or the version you need at /{version}";
-        return;
+      } else {
+        if (path === latestAlias) window.location.href = "/" + latestVersion;
+
+        fetch(licensesDir + "/" + path)
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById("dynamic-content").textContent = data;
+          })
+          .catch(error => {
+            document.getElementById("dynamic-content").textContent = "Something went wrong: " + error;
+          });
       }
-
-      if (path === latestAlias) window.location.href = "/" + latestVersion;
-
-      fetch(licensesDir + "/" + path)
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById("dynamic-content").textContent = data;
-        })
-        .catch(error => {
-          document.getElementById("dynamic-content").textContent = "Something went wrong: " + error;
-        });
     } else {
       window.location.href = "/";
     }
