@@ -11,6 +11,8 @@
   const latestAlias = 'latest';
   const licensesDir = 'raw';
 
+  const guideText = 'Retrieve the latest version of the license at <a href="/latest">/latest</a> or the version you need at /{version}';
+
   document.addEventListener('DOMContentLoaded', function() {
     let path = window.location.pathname.replace(/^\/|\/$/g, '');
 
@@ -22,7 +24,7 @@
           if (response.ok) {
             return response.text();
           }
-          return 'Not found. You can retrieve the latest version of the license at /latest or the version you need at /{version}';
+          return 'Not found. ' + guideText;
         })
         .then(data => {
           document.getElementById('dynamic-content').textContent = data;
@@ -31,7 +33,7 @@
           document.getElementById('dynamic-content').textContent = 'Something went wrong: ' + error;
         });
     } else {
-      window.location.href = '/';
+      document.getElementById('dynamic-content').textContent = guideText;
     }
   });
 </script>
