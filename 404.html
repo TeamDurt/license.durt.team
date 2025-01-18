@@ -1,37 +1,37 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta name="color-scheme" content="light dark"/>
+  <meta name="color-scheme" content="light dark" />
   <title>Team Durt License</title>
 </head>
 <body>
 <pre style="word-wrap: break-word; white-space: pre-wrap;" id="dynamic-content">Loading...</pre>
 <script>
-  const latestVersion = "1.0"; // update this on updating license
-  const latestAlias = "latest";
-  const licensesDir = "raw";
+  const latestVersion = '1.0'; // update this on updating license
+  const latestAlias = 'latest';
+  const licensesDir = 'raw';
 
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener('DOMContentLoaded', function() {
     let path = window.location.pathname.replace(/^\/|\/$/g, '');
 
     if (path) {
-      if (path === latestAlias) window.location.href = "/" + latestVersion;
+      if (path === latestAlias) window.location.href = '/' + latestVersion;
 
-      fetch("/" + licensesDir + "/" + path)
+      fetch('/' + licensesDir + '/' + path)
         .then(response => {
           if (response.ok) {
             return response.text();
           }
-          return "Not found. You can retrieve the latest version of the license at /latest or the version you need at /{version}";
+          return 'Not found. You can retrieve the latest version of the license at /latest or the version you need at /{version}';
         })
         .then(data => {
-          document.getElementById("dynamic-content").textContent = data;
+          document.getElementById('dynamic-content').textContent = data;
         })
         .catch(error => {
-          document.getElementById("dynamic-content").textContent = "Something went wrong: " + error;
+          document.getElementById('dynamic-content').textContent = 'Something went wrong: ' + error;
         });
     } else {
-      window.location.href = "/";
+      window.location.href = '/';
     }
   });
 </script>
