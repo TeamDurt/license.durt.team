@@ -1,0 +1,4 @@
+---
+permalink: /404.html
+---
+Retrieve the latest version of the license at /latest or the version you need at /{version}
