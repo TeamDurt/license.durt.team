@@ -14,6 +14,8 @@
   document.addEventListener("DOMContentLoaded", function () {
     let path = window.location.pathname.replace(/^\/|\/$/g, '');
 
+    console.log(path)
+
     if (path) {
       if (path.startsWith(licensesDir + "/")) {
         document.getElementById("dynamic-content").textContent = "Not found. You can retrieve the latest version of the license at /latest or the version you need at /{version}";
@@ -21,7 +23,9 @@
         if (path === latestAlias) window.location.href = "/" + latestVersion;
 
         fetch(licensesDir + "/" + path)
-          .then(response => response.text())
+          .then(response => {
+            return response.text();
+          })
           .then(data => {
             document.getElementById("dynamic-content").textContent = data;
           })
