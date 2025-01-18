@@ -14,25 +14,22 @@
   document.addEventListener("DOMContentLoaded", function () {
     let path = window.location.pathname.replace(/^\/|\/$/g, '');
 
-    console.log(path)
-
     if (path) {
-      if (path.startsWith(licensesDir + "/")) {
-        document.getElementById("dynamic-content").textContent = "Not found. You can retrieve the latest version of the license at /latest or the version you need at /{version}";
-      } else {
-        if (path === latestAlias) window.location.href = "/" + latestVersion;
+      if (path === latestAlias) window.location.href = "/" + latestVersion;
 
-        fetch(licensesDir + "/" + path)
-          .then(response => {
+      fetch("/" + licensesDir + "/" + path)
+        .then(response => {
+          if (response.ok) {
             return response.text();
-          })
-          .then(data => {
-            document.getElementById("dynamic-content").textContent = data;
-          })
-          .catch(error => {
-            document.getElementById("dynamic-content").textContent = "Something went wrong: " + error;
-          });
-      }
+          }
+          return "Not found. You can retrieve the latest version of the license at /latest or the version you need at /{version}";
+        })
+        .then(data => {
+          document.getElementById("dynamic-content").textContent = data;
+        })
+        .catch(error => {
+          document.getElementById("dynamic-content").textContent = "Something went wrong: " + error;
+        });
     } else {
       window.location.href = "/";
     }
