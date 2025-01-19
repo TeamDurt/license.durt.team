@@ -27,13 +27,13 @@
           return 'Not found. ' + guideText;
         })
         .then(data => {
-          document.getElementById('dynamic-content').textContent = data;
+          document.getElementById('dynamic-content').innerHTML = data;
         })
         .catch(error => {
-          document.getElementById('dynamic-content').textContent = 'Something went wrong: ' + error;
+          document.getElementById('dynamic-content').innerHTML = 'Something went wrong: ' + error;
         });
     } else {
-      document.getElementById('dynamic-content').textContent = guideText;
+      document.getElementById('dynamic-content').innerHTML = guideText;
     }
   });
 </script>
