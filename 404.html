@@ -5,7 +5,7 @@
   <title>Team Durt License</title>
 </head>
 <body>
-<pre style="word-wrap: break-word; white-space: pre-wrap;" id="dynamic-content">Loading...</pre>
+<pre style="word-wrap: break-word; white-space: pre-wrap;" id="content">Loading...</pre>
 <script>
   const latestVersion = '1.0'; // update this on updating license
   const latestAlias = 'latest';
@@ -15,6 +15,7 @@
 
   document.addEventListener('DOMContentLoaded', function() {
     let path = window.location.pathname.replace(/^\/|\/$/g, '');
+    let content = document.getElementById('content');
 
     if (path) {
       if (path === latestAlias) window.location.href = '/' + latestVersion;
@@ -27,13 +28,13 @@
           return 'Not found. ' + guideText;
         })
         .then(data => {
-          document.getElementById('dynamic-content').innerHTML = data;
+          content.innerHTML = data;
         })
         .catch(error => {
-          document.getElementById('dynamic-content').innerHTML = 'Something went wrong: ' + error;
+          content.innerHTML = 'Something went wrong: ' + error;
         });
     } else {
-      document.getElementById('dynamic-content').innerHTML = guideText;
+      content.innerHTML = guideText;
     }
   });
 </script>
